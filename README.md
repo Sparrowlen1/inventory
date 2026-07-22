@@ -1,59 +1,148 @@
 # Inventory Management System
 
-A Flask-based REST API with a CLI frontend for managing inventory, integrating with OpenFoodFacts for product data.
+A **Flask-based REST API** with a **CLI frontend** for managing inventory. The system integrates with **OpenFoodFacts** to fetch product information by barcode or product name.
 
-## Installation
+---
 
-1. Clone the repository: git clone <repo-url>
-2. cd projectts
+# Installation
 
-## create virtual enviornment
+## 1. Clone the Repository
+
+```bash
+git clone <repo-url>
+cd projectts
+```
+
+## 2. Create and Activate a Virtual Environment
+
+### Linux/macOS
+
+```bash
 python -m venv venv
-source venv/bin/activate # Windows: venv\Scripts\activate
+source venv/bin/activate
+```
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+## 3. Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+---
 
-## Running the API
+# Running the API
 
 Start the Flask server:
 
-The API will be available at `http://localhost:5000`.
+```bash
+python app.py
+```
 
-## API Endpoints
+The API will be available at:
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET    | /inventory | List all items |
-| GET    | /inventory/<id> | Get a single item |
-| POST   | /inventory | Add a new item (requires name, price, stock) |
-| PATCH  | /inventory/<id> | Update item fields |
-| DELETE | /inventory/<id> | Delete an item |
-| POST   | /fetch | Fetch product from OpenFoodFacts and add (requires barcode or name, price, stock) |
+```
+http://localhost:5000
+```
 
-## CLI Usage
+---
 
-The CLI interacts with the running API. ENSURE THE SERVER IS RUNNING BEFORE USING
+# API Endpoints
 
-## commands
+|   Method   | Endpoint          | Description                                                                                |
+| :--------: | ----------------- | ------------------------------------------------------------------------------------------ |
+|   **GET**  | `/inventory`      | Retrieve all inventory items                                                               |
+|   **GET**  | `/inventory/<id>` | Retrieve a single inventory item                                                           |
+|  **POST**  | `/inventory`      | Add a new item (requires `name`, `price`, and `stock`)                                     |
+|  **PATCH** | `/inventory/<id>` | Update one or more fields of an item                                                       |
+| **DELETE** | `/inventory/<id>` | Delete an inventory item                                                                   |
+|  **POST**  | `/fetch`          | Fetch a product from OpenFoodFacts using a barcode or product name and add it to inventory |
+
+---
+
+# CLI Usage
+
+The CLI communicates with the running API.
+
+> **ENSURE THE SERVER IS RUNNING BEFORE USING THE CLI.**
+
+## Available Commands
+
+### List all inventory items
+
+```bash
 python cli.py list
+```
+
+### View a single item
+
+```bash
 python cli.py view <id>
+```
+
+### Add a new item
+
+```bash
 python cli.py add <name> <price> <stock> [--brand <brand>] [--ingredients <ingredients>]
+```
+
+### Update an existing item
+
+```bash
 python cli.py update <id> [--name <name>] [--brand <brand>] [--ingredients <ingredients>] [--price <price>] [--stock <stock>]
+```
+
+### Delete an item
+
+```bash
 python cli.py delete <id>
+```
+
+### Fetch a product by barcode
+
+```bash
 python cli.py fetch --barcode <barcode> --price <price> --stock <stock>
+```
+
+### Fetch a product by name
+
+```bash
 python cli.py fetch --name <product_name> --price <price> --stock <stock>
+```
 
-## for testing
+---
 
-## Testing
+# Testing
 
-Run unit tests with pytest:
+Run the unit tests using **pytest**:
 
-## External API Integration
+```bash
+pytest
+```
 
-The system uses OpenFoodFacts to fetch product details by barcode (exact match) or product name (search). The fetched data is merged with manual price and stock before adding to inventory.
+---
 
-## Notes
+# External API Integration
 
-- Inventory is stored in memory; restarting the server resets data.
-- The CLI uses `requests` to communicate with the API; the server must be running.
+The application integrates with **OpenFoodFacts** to retrieve product information.
+
+Supported lookup methods include:
+
+* Barcode (exact match)
+* Product name (search)
+
+The fetched product details are combined with the manually supplied **price** and **stock** before being added to the inventory.
+
+---
+
+# Notes
+
+* Inventory data is stored **in memory**. Restarting the server will reset all inventory data.
+* The CLI uses the **requests** library to communicate with the Flask API.
+* The Flask server **must be running** before executing any CLI commands.
