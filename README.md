@@ -32,7 +32,7 @@ The API will be available at `http://localhost:5000`.
 
 ## CLI Usage
 
-The CLI interacts with the running API. Ensure the server is running before using.
+The CLI interacts with the running API. ENSURE THE SERVER IS RUNNING BEFORE USING
 
 ## commands
 python cli.py list
