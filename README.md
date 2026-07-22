@@ -70,7 +70,7 @@ http://localhost:5000
 
 The CLI communicates with the running API.
 
-> **ENSURE THE SERVER IS RUNNING BEFORE USING THE CLI.**
+> **ENSURE THE SERVER IS RUNNING BEFORE USING THE CLI, AND RUN THE COMMANDS ON ANOTHER TERMINAL AFTER RUNNING python app.py.**
 
 ## Available Commands
 
